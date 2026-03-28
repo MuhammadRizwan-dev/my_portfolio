@@ -4,21 +4,33 @@ on:
   push:
     branches:
       - master
-      
+
 permissions:
   contents: write
+  pages: write      # Ye zaroori hai
+  id-token: write   # Ye bhi zaroori hai
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
       - run: flutter build web --release --base-href /my_portfolio/
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload production-ready build artifacts
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
+          path: ./build/web
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
