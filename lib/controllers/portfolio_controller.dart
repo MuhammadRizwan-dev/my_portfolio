@@ -36,7 +36,7 @@ class PortfolioController {
       title: "Fresh Grocery App",
       subtitle: "Full-stack Mobile App with Firebase Auth & Stripe Payments.",
       icon: Icons.shopping_cart_outlined,
-      tags: ["Firebase", "Stripe", "Provider"],
+      tags: ["Firebase", "Stripe", "Getx"],
       projectUrl: "https://github.com/MuhammadRizwan-dev/grocery_app",
     ),
     ProjectModel(

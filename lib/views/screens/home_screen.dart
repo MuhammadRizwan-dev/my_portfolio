@@ -117,6 +117,7 @@ class HomeScreen extends StatelessWidget {
                         title: p.title,
                         subtitle: p.subtitle,
                         icon: p.icon,
+
                         tags: p.tags,
                         projectUrl: p.projectUrl,
                       ),
