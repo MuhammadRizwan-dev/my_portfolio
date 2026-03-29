@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:async';
 import 'dart:math' as math;
+import 'package:my_portfolio/utils/app_colors.dart';
 
 class RobotBuddy extends StatefulWidget {
   final double size;
@@ -42,6 +43,7 @@ class _RobotBuddyState extends State<RobotBuddy> with TickerProviderStateMixin {
     _glowAnimation = Tween<double>(begin: 0.1, end: 0.4).animate(
       CurvedAnimation(parent: _glowController, curve: Curves.easeInOut),
     );
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       GestureBinding.instance.pointerRouter.addGlobalRoute(_handleGlobalPointerEvent);
     });
@@ -52,11 +54,8 @@ class _RobotBuddyState extends State<RobotBuddy> with TickerProviderStateMixin {
   void _startBlinking() {
     _blinkTimer = Timer.periodic(const Duration(seconds: 2), (timer) async {
       if (!mounted) return;
-
       setState(() => _isBlinking = true);
-
       await Future.delayed(const Duration(milliseconds: 150));
-
       if (mounted) {
         setState(() => _isBlinking = false);
       }
@@ -93,7 +92,7 @@ class _RobotBuddyState extends State<RobotBuddy> with TickerProviderStateMixin {
       builder: (context, child) {
         return Transform.translate(
           offset: Offset(0, _hoverAnimation.value),
-          child: Container(
+          child: SizedBox(
             width: widget.size,
             height: widget.size,
             child: CustomPaint(
@@ -124,8 +123,9 @@ class RobotPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    final primaryColor = Colors.blueAccent;
-    final secondaryColor = Colors.cyanAccent;
+
+    final primaryColor = AppColors.primaryBlue;
+    final secondaryColor = AppColors.accentCyan;
 
     final bodyPaint = Paint()
       ..color = primaryColor.withValues(alpha: 0.1)
@@ -163,13 +163,13 @@ class RobotPainter extends CustomPainter {
 
       final innerCorePaint = Paint()
         ..shader = RadialGradient(
-          colors: [Colors.white, secondaryColor],
+          colors: [AppColors.textWhite, secondaryColor],
         ).createShader(Rect.fromCircle(center: currentLookCenter, radius: eyeRadius * 0.5))
         ..style = PaintingStyle.fill;
       canvas.drawCircle(currentLookCenter, eyeRadius * 0.5, innerCorePaint);
 
       final pupilPaint = Paint()
-        ..color = Colors.white
+        ..color = AppColors.textWhite
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
       canvas.drawCircle(currentLookCenter, eyeRadius * 0.15, pupilPaint);
     }

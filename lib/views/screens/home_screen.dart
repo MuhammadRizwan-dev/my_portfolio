@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/utils/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../controllers/portfolio_controller.dart';
 import '../../models/project_model.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0E21),
+      backgroundColor: AppColors.scaffoldBg,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
           "RIZWAN.DEV",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.blueAccent,
+            color: AppColors.primaryBlue,
           ),
         ),
       ),
@@ -48,14 +49,14 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             ShaderMask(
                               shaderCallback: (bounds) => const LinearGradient(
-                                colors: [Colors.blueAccent, Colors.cyanAccent],
+                                colors: AppColors.heroGradient,
                               ).createShader(bounds),
                               child: Text(
                                 controller.fullName,
                                 style: TextStyle(
                                   fontSize: isDesktop ? 55 : 40,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: AppColors.textWhite,
                                   letterSpacing: -1,
                                 ),
                               ),
@@ -64,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                               controller.heroDescription,
                               style: TextStyle(
                                 fontSize: isDesktop ? 22 : 18,
-                                color: Colors.grey,
+                                color: AppColors.textGrey,
                                 fontWeight: FontWeight.w300,
                               ),
                             ),
@@ -100,36 +101,49 @@ class HomeScreen extends StatelessWidget {
 
               const Text(
                 "My Projects",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textWhite,
+                ),
               ),
               const SizedBox(height: 30),
               Wrap(
                 spacing: 25,
                 runSpacing: 25,
                 children: controller.projects
-                    .map((p) => ProjectCard(
-                  title: p.title,
-                  subtitle: p.subtitle,
-                  icon: p.icon,
-                  tags: p.tags,
-                  projectUrl: p.projectUrl,
-                ))
+                    .map(
+                      (p) => ProjectCard(
+                        title: p.title,
+                        subtitle: p.subtitle,
+                        icon: p.icon,
+                        tags: p.tags,
+                        projectUrl: p.projectUrl,
+                      ),
+                    )
                     .toList(),
               ),
 
               const SizedBox(height: 80),
 
-
               const Text(
                 "About Me",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textWhite,
+                ),
               ),
               const SizedBox(height: 20),
               Container(
                 constraints: const BoxConstraints(maxWidth: 800),
                 child: Text(
                   controller.aboutMe,
-                  style: const TextStyle(fontSize: 18, color: Colors.grey, height: 1.6),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: AppColors.textGrey,
+                    height: 1.6,
+                  ),
                 ),
               ),
 
@@ -137,7 +151,11 @@ class HomeScreen extends StatelessWidget {
 
               const Text(
                 "Technical Skills",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textWhite,
+                ),
               ),
               const SizedBox(height: 30),
               Wrap(
@@ -145,18 +163,33 @@ class HomeScreen extends StatelessWidget {
                 runSpacing: 20,
                 children: controller.skills.map((skill) {
                   return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 25,
+                      vertical: 15,
+                    ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF111729),
+                      color: AppColors.cardBg,
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.2)),
+                      border: Border.all(
+                        color: AppColors.primaryBlue.withValues(alpha: 0.2),
+                      ),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(skill['icon'], color: Colors.blueAccent, size: 24),
+                        Icon(
+                          skill['icon'],
+                          color: AppColors.primaryBlue,
+                          size: 24,
+                        ),
                         const SizedBox(width: 12),
-                        Text(skill['name'], style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
+                        Text(
+                          skill['name'],
+                          style: const TextStyle(
+                            color: AppColors.textWhite,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
                   );
@@ -167,7 +200,11 @@ class HomeScreen extends StatelessWidget {
 
               const Text(
                 "Get In Touch",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textWhite,
+                ),
               ),
               const SizedBox(height: 30),
               Wrap(
@@ -178,13 +215,18 @@ class HomeScreen extends StatelessWidget {
                     icon: Icons.email_outlined,
                     title: "Email Me",
                     value: controller.email,
-                    onTap: () => launchUrl(Uri.parse("mailto:${controller.email}")),
+                    onTap: () =>
+                        launchUrl(Uri.parse("mailto:${controller.email}")),
                   ),
                   ContactCard(
                     icon: Icons.phone_android_outlined,
                     title: "WhatsApp / Call",
                     value: controller.phone,
-                    onTap: () => launchUrl(Uri.parse("https://wa.me/${controller.phone.replaceAll('-', '')}")),
+                    onTap: () => launchUrl(
+                      Uri.parse(
+                        "https://wa.me/${controller.phone.replaceAll('-', '')}",
+                      ),
+                    ),
                   ),
                   ContactCard(
                     icon: Icons.location_on_outlined,
@@ -200,10 +242,19 @@ class HomeScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    const Text("Built with ❤️ using Flutter", style: TextStyle(color: Colors.grey, fontSize: 14)),
+                    const Text(
+                      "Built with ❤️ using Flutter",
+                      style: TextStyle(color: AppColors.textGrey, fontSize: 14),
+                    ),
                     const SizedBox(height: 10),
-                    Text("© 2026 Muhammad Rizwan. All Rights Reserved.",
-                        style: TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w300)),
+                    Text(
+                      "© 2026 Muhammad Rizwan. All Rights Reserved.",
+                      style: TextStyle(
+                        color: AppColors.textGrey,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
                     const SizedBox(height: 40),
                   ],
                 ),
@@ -221,10 +272,13 @@ class HomeScreen extends StatelessWidget {
         final Uri url = Uri.parse(link.url);
         if (!await launchUrl(url)) throw Exception('Could not Launch $url');
       },
-      icon: Icon(link.icon, size: 18, color: Colors.blueAccent),
-      label: Text(link.label, style: const TextStyle(color: Colors.white70)),
+      icon: Icon(link.icon, size: 18, color: AppColors.primaryBlue),
+      label: Text(
+        link.label,
+        style: const TextStyle(color: AppColors.textWhite70),
+      ),
       style: OutlinedButton.styleFrom(
-        side: BorderSide(color: Colors.blueAccent.withValues(alpha: 0.5)),
+        side: BorderSide(color: AppColors.primaryBlue.withValues(alpha: 0.5)),
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
