@@ -53,6 +53,12 @@ class PortfolioController {
       icon: Icons.dashboard_customize_outlined,
       tags: ["Dashboard", "Admin", "Firebase"],
       projectUrl: '',
+    ),ProjectModel(
+      title: "Exam Master (Hybrid)",
+      subtitle: "Smart MCQ engine with offline mode and serverless chat integration.",
+      icon: Icons.school_rounded,
+      tags: ["Offline Mode", "Dual-Mode UI", "Google Sheets API"],
+      projectUrl: '',
     ),
   ];
 
