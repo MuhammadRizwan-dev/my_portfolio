@@ -30,8 +30,9 @@ class PortfolioController {
           "https://drive.google.com/file/d/1MDuCNywycySv9XGnJ9tYCUJpXWWFZSGA/view?usp=sharing",
     ),
   ];
-
-  final List<ProjectModel> projects = [
+  // Ye logic dono lists ko combine kar degi automatically
+  List<ProjectModel> get projects => [...myOwnProjects, ...enhancedProjects];
+  final List<ProjectModel> myOwnProjects = [
     ProjectModel(
       title: "Fresh Grocery App",
       subtitle: "Full-stack Mobile App with Firebase Auth & Stripe Payments.",
@@ -62,6 +63,8 @@ class PortfolioController {
       tags: ["Offline Mode", "Dual-Mode UI", "Google Sheets API"],
       projectUrl: '',
     ),
+  ];
+  final List<ProjectModel> enhancedProjects = [
     ProjectModel(
       title: "WhatsApp Scheduler",
       subtitle:

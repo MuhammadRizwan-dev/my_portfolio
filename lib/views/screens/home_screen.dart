@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio/utils/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../controllers/portfolio_controller.dart';
-import '../../models/project_model.dart';
 import '../widgets/contact_card.dart';
-import '../widgets/project_card.dart';
+import '../widgets/projects_grid.dart';
 import '../widgets/robot_buddy.dart';
+import '../widgets/social_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                               spacing: 25,
                               runSpacing: 20,
                               children: controller.socialLinks
-                                  .map((link) => _socialIconHelper(link))
+                                  .map((link) => SocialButton(link: link))
                                   .toList(),
                             ),
                           ],
@@ -98,7 +98,6 @@ class HomeScreen extends StatelessWidget {
                 ),
 
               const SizedBox(height: 100),
-
               const Text(
                 "My Projects",
                 style: TextStyle(
@@ -107,26 +106,40 @@ class HomeScreen extends StatelessWidget {
                   color: AppColors.textWhite,
                 ),
               ),
-              const SizedBox(height: 30),
-              Wrap(
-                spacing: 25,
-                runSpacing: 25,
-                children: controller.projects
-                    .map(
-                      (p) => ProjectCard(
-                        title: p.title,
-                        subtitle: p.subtitle,
-                        icon: p.icon,
+              const SizedBox(height: 20),
 
-                        tags: p.tags,
-                        projectUrl: p.projectUrl,
+              DefaultTabController(
+                length: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TabBar(
+                      isScrollable: true,
+                      indicatorColor: AppColors.primaryBlue,
+                      labelColor: AppColors.primaryBlue,
+                      unselectedLabelColor: AppColors.textGrey,
+                      tabs: [
+                        Tab(text: "All Projects"),
+                        Tab(text: "Built from Scratch"),
+                        Tab(text: "Major Enhancements"),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+
+                    SizedBox(
+                      height:
+                          800,
+                      child: TabBarView(
+                        children: [
+                          ProjectsGrid(projects: controller.projects),
+                          ProjectsGrid(projects: controller.myOwnProjects),
+                          ProjectsGrid(projects: controller.enhancedProjects),
+                        ],
                       ),
-                    )
-                    .toList(),
+                    ),
+                  ],
+                ),
               ),
-
-              const SizedBox(height: 80),
-
               const Text(
                 "About Me",
                 style: TextStyle(
@@ -263,25 +276,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _socialIconHelper(SocialLinkModel link) {
-    return OutlinedButton.icon(
-      onPressed: () async {
-        final Uri url = Uri.parse(link.url);
-        if (!await launchUrl(url)) throw Exception('Could not Launch $url');
-      },
-      icon: Icon(link.icon, size: 18, color: AppColors.primaryBlue),
-      label: Text(
-        link.label,
-        style: const TextStyle(color: AppColors.textWhite70),
-      ),
-      style: OutlinedButton.styleFrom(
-        side: BorderSide(color: AppColors.primaryBlue.withValues(alpha: 0.5)),
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }
