@@ -53,11 +53,39 @@ class PortfolioController {
       icon: Icons.dashboard_customize_outlined,
       tags: ["Dashboard", "Admin", "Firebase"],
       projectUrl: '',
-    ),ProjectModel(
+    ),
+    ProjectModel(
       title: "Exam Master (Hybrid)",
-      subtitle: "Smart MCQ engine with offline mode and serverless chat integration.",
+      subtitle:
+          "Smart MCQ engine with offline mode and serverless chat integration.",
       icon: Icons.school_rounded,
       tags: ["Offline Mode", "Dual-Mode UI", "Google Sheets API"],
+      projectUrl: '',
+    ),
+    ProjectModel(
+      title: "WhatsApp Scheduler",
+      subtitle:
+          "A smart automation tool with custom background services, real-time Firestore sync, and intelligent scheduling logic.",
+      icon: Icons.schedule_send_rounded,
+      tags: [
+        "Background Tasks",
+        "Exact Alarms",
+        "Firestore Streams",
+        "Smart UI",
+      ],
+      projectUrl: '',
+    ),
+    ProjectModel(
+      title: "Al-Quran Digital",
+      subtitle:
+          "A professional Islamic app featuring synchronized audio recitations, automated playlist streaming, and a personalized bookmarking system.",
+      icon: Icons.menu_book_rounded,
+      tags: [
+        "Audio Streaming",
+        "Playlist Logic",
+        "UI-Audio Sync",
+        "GetX State",
+      ],
       projectUrl: '',
     ),
   ];
@@ -77,5 +105,4 @@ Currently, I am exploring AI automation with Python and advanced State Managemen
     {"name": "Stripe", "icon": Icons.payments},
     {"name": "Java/C++", "icon": Icons.settings_suggest},
   ];
-
 }
