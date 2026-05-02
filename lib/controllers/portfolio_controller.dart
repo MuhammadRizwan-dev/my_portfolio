@@ -30,7 +30,6 @@ class PortfolioController {
           "https://drive.google.com/file/d/1MDuCNywycySv9XGnJ9tYCUJpXWWFZSGA/view?usp=sharing",
     ),
   ];
-  // Ye logic dono lists ko combine kar degi automatically
   List<ProjectModel> get projects => [...myOwnProjects, ...enhancedProjects];
   final List<ProjectModel> myOwnProjects = [
     ProjectModel(
@@ -39,6 +38,7 @@ class PortfolioController {
       icon: Icons.shopping_cart_outlined,
       tags: ["Firebase", "Stripe", "Getx"],
       projectUrl: "https://github.com/MuhammadRizwan-dev/grocery_app",
+      images: [],
     ),
     ProjectModel(
       title: "Task Reminder App",
@@ -47,6 +47,7 @@ class PortfolioController {
       icon: Icons.notifications_active_outlined,
       tags: ["SQLite", "Notifications", "Dart"],
       projectUrl: "https://github.com/MuhammadRizwan-dev/reminder_app",
+      images: [],
     ),
     ProjectModel(
       title: "Admin Panel",
@@ -54,6 +55,7 @@ class PortfolioController {
       icon: Icons.dashboard_customize_outlined,
       tags: ["Dashboard", "Admin", "Firebase"],
       projectUrl: '',
+      images: [],
     ),
     ProjectModel(
       title: "Exam Master (Hybrid)",
@@ -62,6 +64,7 @@ class PortfolioController {
       icon: Icons.school_rounded,
       tags: ["Offline Mode", "Dual-Mode UI", "Google Sheets API"],
       projectUrl: '',
+      images: [],
     ),
   ];
   final List<ProjectModel> enhancedProjects = [
@@ -77,6 +80,7 @@ class PortfolioController {
         "Smart UI",
       ],
       projectUrl: '',
+      images: [],
     ),
     ProjectModel(
       title: "Al-Quran Digital",
@@ -90,6 +94,7 @@ class PortfolioController {
         "GetX State",
       ],
       projectUrl: '',
+      images: [],
     ),
   ];
 

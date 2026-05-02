@@ -6,13 +6,15 @@ class ProjectModel {
   final IconData icon;
   final List<String> tags;
   final String projectUrl;
+  final List<String> images;
 
   ProjectModel({
     required this.title,
     required this.subtitle,
     required this.icon,
     required this.tags,
-    required this.projectUrl
+    required this.projectUrl,
+    required this.images,
   });
 }
 
@@ -21,9 +23,5 @@ class SocialLinkModel {
   final String label;
   final String url;
 
-  SocialLinkModel({
-    required this.icon,
-    required this.label,
-    required this.url,
-  });
+  SocialLinkModel({required this.icon, required this.label, required this.url});
 }
