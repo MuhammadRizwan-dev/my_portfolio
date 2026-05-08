@@ -53,6 +53,7 @@ class PortfolioController {
         "assets/images/grocery_app/nectar_app_ss12.png",
         "assets/images/grocery_app/nectar_app_13.png",
       ],
+      demoUrl: "https://youtu.be/CUxGNavEWdY",
     ),
     ProjectModel(
       title: "Task Reminder App",
@@ -65,6 +66,7 @@ class PortfolioController {
         "assets/images/reminder_app/reminder_app_ss1.png",
         "assets/images/reminder_app/reminder_app_ss2.png",
       ],
+      demoUrl: "https://youtube.com/shorts/_BT8ldwHj04?feature=share",
     ),
     ProjectModel(
       title: "Admin Panel",
@@ -77,6 +79,7 @@ class PortfolioController {
         "assets/images/admin_pannel/admin_pannel_ss2.png",
         "assets/images/admin_pannel/admin_panel_ss3.png",
       ],
+      demoUrl: "https://youtube.com/shorts/uLNSolZmGgU?feature=share",
     ),
     ProjectModel(
       title: "Exam Master (Hybrid)",
@@ -94,6 +97,7 @@ class PortfolioController {
         "assets/images/exam_master_app/exam_master_ss6.png",
         "assets/images/exam_master_app/exam_master_ss7.png",
       ],
+      demoUrl: "https://youtube.com/shorts/29LJPQXyg0U?feature=share",
     ),
   ];
   final List<ProjectModel> enhancedProjects = [
@@ -110,6 +114,7 @@ class PortfolioController {
       ],
       projectUrl: '',
       images: [],
+      demoUrl: "https://youtube.com/shorts/Y7cpSqCVF38?feature=share",
     ),
     ProjectModel(
       title: "Al-Quran Digital",
@@ -141,6 +146,7 @@ class PortfolioController {
         "assets/images/al_quran_app/quran_app_ss15.png",
         "assets/images/al_quran_app/quran_app_ss16.png",
       ],
+      demoUrl: "https://youtube.com/shorts/uRzcOb96fMw?feature=share",
     ),
   ];
 

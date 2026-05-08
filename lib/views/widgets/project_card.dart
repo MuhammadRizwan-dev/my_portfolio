@@ -12,6 +12,7 @@ class ProjectCard extends StatefulWidget {
   final List<String> tags;
   final String projectUrl;
   final List<String> images;
+  final String demoUrl;
 
   const ProjectCard({
     super.key,
@@ -21,6 +22,7 @@ class ProjectCard extends StatefulWidget {
     required this.tags,
     required this.projectUrl,
     required this.images,
+     this.demoUrl ="",
   });
 
   @override
@@ -117,7 +119,30 @@ class _ProjectCardState extends State<ProjectCard> {
                         ),
                       )
                       .toList(),
-                ),
+                ),// Demo button
+                const SizedBox(height: 10),
+                if (widget.demoUrl.isNotEmpty) ...[
+                  GestureDetector(
+                    onTap: () async {
+                      final Uri url = Uri.parse(widget.demoUrl);
+                      if (!await launchUrl(url)) throw Exception('Could not launch $url');
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(Icons.play_circle_outline, color: Colors.redAccent, size: 18),
+                        const SizedBox(width: 5),
+                        Text(
+                          "Watch Demo",
+                          style: TextStyle(
+                            color: isHovered ? Colors.redAccent : AppColors.textWhite70,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 25),
                 GestureDetector(
                   onTap: widget.projectUrl.isEmpty
@@ -168,14 +193,17 @@ class _ProjectCardState extends State<ProjectCard> {
             child: Tooltip(
               message: "View Screenshots",
               child: GestureDetector(
-                onTap: () => showProjectGallery(context, ProjectModel(
-                  title: widget.title,
-                  subtitle: widget.subtitle,
-                  icon: widget.icon,
-                  tags: widget.tags,
-                  projectUrl: widget.projectUrl,
-                  images: widget.images,
-                )),
+                onTap: () => showProjectGallery(
+                  context,
+                  ProjectModel(
+                    title: widget.title,
+                    subtitle: widget.subtitle,
+                    icon: widget.icon,
+                    tags: widget.tags,
+                    projectUrl: widget.projectUrl,
+                    images: widget.images,
+                  ),
+                ),
                 child: AnimatedOpacity(
                   opacity: isHovered ? 1.0 : 0.5,
                   duration: const Duration(milliseconds: 250),

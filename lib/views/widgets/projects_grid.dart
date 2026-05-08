@@ -20,6 +20,7 @@ class ProjectsGrid extends StatelessWidget {
           tags: p.tags,
           projectUrl: p.projectUrl,
           images: p.images,
+          demoUrl: p.demoUrl,
         )).toList(),
       ),
     );

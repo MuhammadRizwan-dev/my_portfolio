@@ -34,10 +34,10 @@ class _GalleryDialogState extends State<_GalleryDialog> {
   void initState() {
     super.initState();
     _pageController = PageController();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      for (final imagePath in widget.project.images) {
-        precacheImage(AssetImage(imagePath), context);
+      precacheImage(AssetImage(widget.project.images[0]), context);
+      if (widget.project.images.length > 1) {
+        precacheImage(AssetImage(widget.project.images[1]), context);
       }
     });
   }
@@ -66,7 +66,14 @@ class _GalleryDialogState extends State<_GalleryDialog> {
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: total,
-                  onPageChanged: (i) => setState(() => _currentIndex = i),
+                  // ✅ Scroll karo toh next image preload ho
+                  onPageChanged: (i) {
+                    setState(() => _currentIndex = i);
+                    final next = i + 1;
+                    if (next < widget.project.images.length) {
+                      precacheImage(AssetImage(widget.project.images[next]), context);
+                    }
+                  },
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -74,6 +81,7 @@ class _GalleryDialogState extends State<_GalleryDialog> {
                         child: Image.asset(
                           widget.project.images[index],
                           fit: BoxFit.contain,
+                          cacheWidth: 800, // ✅ Memory mein compressed
                         ),
                       ),
                     );

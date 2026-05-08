@@ -7,7 +7,7 @@ class ProjectModel {
   final List<String> tags;
   final String projectUrl;
   final List<String> images;
-
+  final String demoUrl;
   ProjectModel({
     required this.title,
     required this.subtitle,
@@ -15,6 +15,7 @@ class ProjectModel {
     required this.tags,
     required this.projectUrl,
     required this.images,
+    this.demoUrl = "",
   });
 }
 
