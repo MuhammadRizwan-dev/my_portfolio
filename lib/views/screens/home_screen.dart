@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio/utils/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../controllers/portfolio_controller.dart';
+import '../widgets/available_badge.dart';
 import '../widgets/contact_card.dart';
+import '../widgets/profile_photo.dart';
 import '../widgets/projects_grid.dart';
 import '../widgets/robot_buddy.dart';
 import '../widgets/social_button.dart';
+import '../widgets/stat_badge.dart';
+import '../widgets/typing_text.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,17 +40,84 @@ class HomeScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 30),
 
+              // LayoutBuilder(
+              //   builder: (context, constraints) {
+              //     bool isDesktop = constraints.maxWidth > 900;
+              //     return Row(
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         Expanded(
+              //           flex: 3,
+              //           child: Column(
+              //             crossAxisAlignment: CrossAxisAlignment.start,
+              //             children: [
+              //               ShaderMask(
+              //                 shaderCallback: (bounds) => const LinearGradient(
+              //                   colors: AppColors.heroGradient,
+              //                 ).createShader(bounds),
+              //                 child: Text(
+              //                   controller.fullName,
+              //                   style: TextStyle(
+              //                     fontSize: isDesktop ? 55 : 40,
+              //                     fontWeight: FontWeight.bold,
+              //                     color: AppColors.textWhite,
+              //                     letterSpacing: -1,
+              //                   ),
+              //                 ),
+              //               ),
+              //               Text(
+              //                 controller.heroDescription,
+              //                 style: TextStyle(
+              //                   fontSize: isDesktop ? 22 : 18,
+              //                   color: AppColors.textGrey,
+              //                   fontWeight: FontWeight.w300,
+              //                 ),
+              //               ),
+              //               const SizedBox(height: 25),
+              //               Wrap(
+              //                 spacing: 25,
+              //                 runSpacing: 20,
+              //                 children: controller.socialLinks
+              //                     .map((link) => SocialButton(link: link))
+              //                     .toList(),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //         if (isDesktop)
+              //           const Expanded(
+              //             flex: 1,
+              //             child: Center(child: RobotBuddy(size: 200)),
+              //           ),
+              //       ],
+              //     );
+              //   },
+              // ),
+              // if (size.width <= 900)
+              //   const Center(
+              //     child: Padding(
+              //       padding: EdgeInsets.only(top: 50),
+              //       child: RobotBuddy(size: 160),
+              //     ),
+              //   ),
               LayoutBuilder(
                 builder: (context, constraints) {
                   bool isDesktop = constraints.maxWidth > 900;
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+
+                      if (isDesktop)
+                        Expanded(
+                          flex: 2,
+                          child: Center(child: ProfilePhoto()),
+                        ),
                       Expanded(
                         flex: 3,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const SizedBox(height: 16),
                             ShaderMask(
                               shaderCallback: (bounds) => const LinearGradient(
                                 colors: AppColors.heroGradient,
@@ -61,15 +132,42 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 8),
+                            TypingText(
+                              texts: const [
+                                "Flutter Developer",
+                                "Firebase Expert",
+                                "Freelancer",
+                              ],
+                              style: TextStyle(
+                                fontSize: isDesktop ? 22 : 18,
+                                color: AppColors.primaryBlue,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
                             Text(
                               controller.heroDescription,
                               style: TextStyle(
-                                fontSize: isDesktop ? 22 : 18,
+                                fontSize: isDesktop ? 16 : 14,
                                 color: AppColors.textGrey,
                                 fontWeight: FontWeight.w300,
                               ),
                             ),
+                            const SizedBox(height: 20),
+                            const Row(
+                              children: [
+                                StatBadge(number: "6+", label: "Projects"),
+                                SizedBox(width: 20),
+                                StatBadge(number: "3+", label: "Yrs Exp"),
+                                SizedBox(width: 20),
+                                StatBadge(number: "2", label: "Clients"),
+                              ],
+                            ),
+
                             const SizedBox(height: 25),
+                            const AvailableBadge(),
+                          const SizedBox(height: 10,),
                             Wrap(
                               spacing: 25,
                               runSpacing: 20,
@@ -80,23 +178,31 @@ class HomeScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+
                       if (isDesktop)
                         const Expanded(
                           flex: 1,
-                          child: Center(child: RobotBuddy(size: 200)),
+                          child: Center(child: RobotBuddy(size: 180)),
                         ),
                     ],
                   );
                 },
               ),
+
               if (size.width <= 900)
-                const Center(
+                Center(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 50),
-                    child: RobotBuddy(size: 160),
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ProfilePhoto(size: 130),
+                        const SizedBox(width: 20),
+                        const RobotBuddy(size: 120),
+                      ],
+                    ),
                   ),
                 ),
-
               const SizedBox(height: 100),
               const Text(
                 "My Projects",
