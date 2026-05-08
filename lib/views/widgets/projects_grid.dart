@@ -13,15 +13,7 @@ class ProjectsGrid extends StatelessWidget {
       child: Wrap(
         spacing: 25,
         runSpacing: 25,
-        children: projects.map((p) => ProjectCard(
-          title: p.title,
-          subtitle: p.subtitle,
-          icon: p.icon,
-          tags: p.tags,
-          projectUrl: p.projectUrl,
-          images: p.images,
-          demoUrl: p.demoUrl,
-        )).toList(),
+        children: projects.map((p) => ProjectCard(project: p)).toList(),
       ),
     );
   }

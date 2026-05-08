@@ -100,6 +100,19 @@ class HomeScreen extends StatelessWidget {
               //       child: RobotBuddy(size: 160),
               //     ),
               //   ),
+              if (size.width <= 900)
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ProfilePhoto(size: 100),
+                        const SizedBox(width: 20),
+                      ],
+                    ),
+                  ),
+                ),
               LayoutBuilder(
                 builder: (context, constraints) {
                   bool isDesktop = constraints.maxWidth > 900;
@@ -188,21 +201,6 @@ class HomeScreen extends StatelessWidget {
                   );
                 },
               ),
-
-              if (size.width <= 900)
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ProfilePhoto(size: 130),
-                        const SizedBox(width: 20),
-                        const RobotBuddy(size: 120),
-                      ],
-                    ),
-                  ),
-                ),
               const SizedBox(height: 100),
               const Text(
                 "My Projects",
