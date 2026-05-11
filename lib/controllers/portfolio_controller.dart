@@ -146,7 +146,7 @@ class PortfolioController {
         "assets/images/al_quran_app/quran_app_ss15.png",
         "assets/images/al_quran_app/quran_app_ss16.png",
       ],
-      demoUrl: "https://youtube.com/shorts/uRzcOb96fMw?feature=share",
+      demoUrl: "https://youtu.be/np0RuSgMr_c",
     ),
   ];
 
