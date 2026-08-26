@@ -8,6 +8,8 @@ class ProjectModel {
   final String projectUrl;
   final List<String> images;
   final String demoUrl;
+  final String apkUrl;
+  final String webUrl;
   ProjectModel({
     required this.title,
     required this.subtitle,
@@ -16,6 +18,8 @@ class ProjectModel {
     required this.projectUrl,
     required this.images,
     this.demoUrl = "",
+    this.apkUrl = "",
+    this.webUrl = "",
   });
 }
 

@@ -235,6 +235,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../models/project_model.dart';
 import '../../utils/app_colors.dart';
@@ -352,7 +353,70 @@ class _ProjectCardState extends State<ProjectCard> {
                   const SizedBox(height: 12),
                 ],
 
-                // 2. VIEW PROJECT (FittedBox added here too)
+                // 2. DOWNLOAD APK + QR (only shown when apkUrl is set)
+                if (widget.project.apkUrl.isNotEmpty) ...[
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () => _launchUrl(widget.project.apkUrl),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.android_rounded, color: Colors.greenAccent, size: 18),
+                              const SizedBox(width: 5),
+                              Text(
+                                "Download APK",
+                                style: TextStyle(
+                                  color: isHovered ? Colors.greenAccent : AppColors.textWhite70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        InkWell(
+                          borderRadius: BorderRadius.circular(8),
+                          onTap: () => _showQrDialog(context, widget.project),
+                          child: const Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Icon(Icons.qr_code_2_rounded, color: AppColors.accentCyan, size: 20),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+
+                // 2b. OPEN WEB APP (for web-based/private projects, shown when webUrl is set)
+                if (widget.project.webUrl.isNotEmpty) ...[
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: GestureDetector(
+                      onTap: () => _launchUrl(widget.project.webUrl),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.open_in_new_rounded, color: Colors.orangeAccent, size: 18),
+                          const SizedBox(width: 5),
+                          Text(
+                            "Open Web App",
+                            style: TextStyle(
+                              color: isHovered ? Colors.orangeAccent : AppColors.textWhite70,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+
+                // 3. VIEW PROJECT (FittedBox added here too)
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: GestureDetector(
@@ -431,5 +495,48 @@ class _ProjectCardState extends State<ProjectCard> {
   Future<void> _launchUrl(String urlString) async {
     final Uri url = Uri.parse(urlString);
     if (!await launchUrl(url)) throw Exception('Could not launch $url');
+  }
+
+  void _showQrDialog(BuildContext context, ProjectModel project) {
+    showDialog(
+      context: context,
+      builder: (ctx) => Dialog(
+        backgroundColor: AppColors.cardBg,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                project.title,
+                style: const TextStyle(color: AppColors.textWhite, fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                "Scan to install on your phone",
+                style: TextStyle(color: AppColors.textGrey, fontSize: 12),
+              ),
+              const SizedBox(height: 18),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+                child: QrImageView(
+                  data: project.apkUrl,
+                  version: QrVersions.auto,
+                  size: 200,
+                  gapless: false,
+                ),
+              ),
+              const SizedBox(height: 18),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text("Close", style: TextStyle(color: AppColors.accentCyan)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

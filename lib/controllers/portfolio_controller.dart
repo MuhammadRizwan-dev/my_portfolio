@@ -27,7 +27,7 @@ class PortfolioController {
       icon: Icons.description_rounded,
       label: "Resume",
       url:
-          "https://drive.google.com/file/d/1MDuCNywycySv9XGnJ9tYCUJpXWWFZSGA/view?usp=sharing",
+      "https://drive.google.com/file/d/1MDuCNywycySv9XGnJ9tYCUJpXWWFZSGA/view?usp=sharing",
     ),
   ];
   List<ProjectModel> get projects => [...myOwnProjects, ...enhancedProjects];
@@ -54,11 +54,12 @@ class PortfolioController {
         "assets/images/grocery_app/nectar_app_13.png",
       ],
       demoUrl: "https://youtu.be/CUxGNavEWdY",
+      apkUrl: "https://github.com/MuhammadRizwan-dev/grocery_app/releases/latest/download/grocery_app.apk",
     ),
     ProjectModel(
       title: "Task Reminder App",
       subtitle:
-          "Local notifications & SQLite database for persistent task management.",
+      "Local notifications & SQLite database for persistent task management.",
       icon: Icons.notifications_active_outlined,
       tags: ["SQLite", "Notifications", "Dart"],
       projectUrl: "https://github.com/MuhammadRizwan-dev/reminder_app",
@@ -67,6 +68,7 @@ class PortfolioController {
         "assets/images/reminder_app/reminder_app_ss2.png",
       ],
       demoUrl: "https://youtube.com/shorts/_BT8ldwHj04?feature=share",
+      apkUrl: "https://github.com/MuhammadRizwan-dev/reminder_app/releases/latest/download/reminder_app.apk",
     ),
     ProjectModel(
       title: "Admin Panel",
@@ -80,11 +82,12 @@ class PortfolioController {
         "assets/images/admin_pannel/admin_panel_ss3.png",
       ],
       demoUrl: "https://youtube.com/shorts/uLNSolZmGgU?feature=share",
+      webUrl: "",
     ),
     ProjectModel(
       title: "Exam Master (Hybrid)",
       subtitle:
-          "Smart MCQ engine with offline mode and serverless chat integration.",
+      "Smart MCQ engine with offline mode and serverless chat integration.",
       icon: Icons.school_rounded,
       tags: ["Offline Mode", "Dual-Mode UI", "Google Sheets API"],
       projectUrl: '',
@@ -104,7 +107,7 @@ class PortfolioController {
     ProjectModel(
       title: "WhatsApp Scheduler",
       subtitle:
-          "A smart automation tool with custom background services, real-time Firestore sync, and intelligent scheduling logic.",
+      "A smart automation tool with custom background services, real-time Firestore sync, and intelligent scheduling logic.",
       icon: Icons.schedule_send_rounded,
       tags: [
         "Background Tasks",
@@ -119,7 +122,7 @@ class PortfolioController {
     ProjectModel(
       title: "Al-Quran Digital",
       subtitle:
-          "A professional Islamic app featuring synchronized audio recitations, automated playlist streaming, and a personalized bookmarking system.",
+      "A professional Islamic app featuring synchronized audio recitations, automated playlist streaming, and a personalized bookmarking system.",
       icon: Icons.menu_book_rounded,
       tags: [
         "Audio Streaming",
